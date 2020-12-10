@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="refsetReleaseFile">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="timeframe"/>
+				<xsd:element ref="conceptRefset"/>
+			</xsd:sequence>
+			<xsd:attribute name="releaseDate" type="xsd:string" use="required"/>
+			<xsd:attribute name="snomedCTrelease" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="timeframe">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="startdate"/>
+				<xsd:element ref="enddate"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="enddate" type="xsd:string"/>
+	<xsd:element name="startdate" type="xsd:string"/>
+	<xsd:element name="conceptRefset">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="addedConceptMembers"/>
+				<xsd:element ref="changedConceptMembers"/>
+				<xsd:element ref="retiredConceptMembers"/>
+			</xsd:sequence>
+			<xsd:attribute name="refsetId" type="xsd:string" use="required"/>
+			<xsd:attribute name="name" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="addedConceptMembers">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element minOccurs="0" maxOccurs="unbounded" ref="conceptMember"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="retiredConceptMembers">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="retiredConceptMember"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="conceptMember">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element minOccurs="1" ref="concept"/>
+			</xsd:sequence>
+			<xsd:attribute name="refsetEffectiveTime" type="xsd:string" use="required"/>
+			<xsd:attribute name="active" type="xsd:string" use="required"/>
+			<xsd:attribute name="moduleId" type="xsd:string"/>
+			<xsd:attribute name="displayTerm" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="concept">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="languagePreferences"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="conceptHistory"/>
+			</xsd:sequence>
+			<xsd:attribute name="conceptId" type="xsd:string" use="required"/>
+			<xsd:attribute name="effectiveTime" type="xsd:string" use="required"/>
+			<xsd:attribute name="active" type="xsd:string" use="required"/>
+			<xsd:attribute name="moduleId" type="xsd:string" use="required"/>
+			<xsd:attribute name="definitionStatusId" type="xsd:string" use="required"></xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="languagePreferences">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="1" minOccurs="1" ref="addedLanguagePreferences"/>
+				<xsd:element maxOccurs="1" minOccurs="1" ref="changedLanguagePreferences"/>
+				<xsd:element maxOccurs="1" minOccurs="1" ref="retiredLanguagePreferences"/>
+			</xsd:sequence>
+			<xsd:attribute name="refsetId" type="xsd:string" use="required"/>
+			<xsd:attribute name="name" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="conceptHistory">
+		<xsd:complexType>
+			<xsd:attribute name="conceptId" type="xsd:string" use="required"/>
+			<xsd:attribute name="effectiveTime" type="xsd:string" use="required"/>
+			<xsd:attribute name="active" type="xsd:string" use="required"/>
+			<xsd:attribute name="moduleId" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="addedLanguagePreferences">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="languagePreference"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="changedLanguagePreferences">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="languagePreference"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="retiredLanguagePreferences">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="languagePreference"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="languagePreference">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element minOccurs="0" maxOccurs="1" ref="description"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="languagePreferenceHistory"/>
+			</xsd:sequence>
+			<xsd:attribute name="refsetEffectiveTime" type="xsd:string" use="required"/>
+			<xsd:attribute name="active" type="xsd:string" use="required"/>
+			<xsd:attribute name="moduleId" type="xsd:string" use="required"/>
+			<xsd:attribute name="designation" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="description">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="descriptionHistory"/>
+			</xsd:sequence>
+			<xsd:attribute name="descriptionId" type="xsd:string" use="required"/>
+			<xsd:attribute name="active" type="xsd:string" use="required"/>
+			<xsd:attribute name="effectiveTime" type="xsd:string" use="required"/>
+			<xsd:attribute name="moduleId" type="xsd:string" use="required"/>
+			<xsd:attribute name="term" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="descriptionHistory" nillable="false">
+		<xsd:complexType>
+			<xsd:attribute name="active" type="xsd:string" use="required"/>
+			<xsd:attribute name="effectiveTime" type="xsd:string" use="required"/>
+			<xsd:attribute name="descriptionId" type="xsd:string" use="required"/>
+			<xsd:attribute name="moduleId" type="xsd:string" use="required"/>
+			<xsd:attribute name="term" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="languagePreferenceHistory">
+		<xsd:complexType>
+			<xsd:attribute name="refsetEffectiveTime" type="xsd:string" use="required"/>
+			<xsd:attribute name="designation" type="xsd:string" use="required"/>
+			<xsd:attribute name="active" type="xsd:string" use="required"/>
+			<xsd:attribute name="moduleId" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="changedConceptMembers">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element  minOccurs="0" maxOccurs="unbounded" ref="conceptMember"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="retiredConceptMember">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="1" minOccurs="1" ref="conceptMember"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="refsetReplacements"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>	
+	<xsd:element name="refsetReplacements">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element minOccurs="0" ref="replacedBy"/>
+				<xsd:element minOccurs="0" ref="sameAs"/>
+				<xsd:element minOccurs="0" maxOccurs="unbounded" ref="mayBeA"/>
+				<xsd:element minOccurs="0" maxOccurs="unbounded" ref="similarTo"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="mayBeA">
+		<xsd:complexType>
+			<xsd:attribute name="conceptid" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="sameAs">
+		<xsd:complexType>
+			<xsd:attribute name="conceptid" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>	
+	<xsd:element name="replacedBy">
+		<xsd:complexType>
+			<xsd:attribute name="conceptid" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>	
+		<xsd:element name="similarTo">
+		<xsd:complexType>
+			<xsd:attribute name="conceptid" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>	
+</xsd:schema>
